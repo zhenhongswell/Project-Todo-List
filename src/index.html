@@ -1,39 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Todo List</h1>
-    <div> 
-        <h1>createTodo</h1>
-        <div>
-            <label for="title">Title</label>
-            <input type="text" name="title" id="title"><br>
-            <label for="describe">Describe</label>
-            <input type="text" name="describe" id="describe"><br>
-            <label for="state">State</label>
-            <select name="state" id="state">
-            <option value="default">default</option>
-            <option value="progress">progress</option>
-            <option value="finish">finish</option>
-            </select>
-            <br>
-            <button class="createTodo">create!</button>
-        </div>
+    <div>
+      <h1>createTodo</h1>
+      <div class="createTodo">
+        <label for="title">Title</label>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          value="testing title"
+        /><br />
+        <label for="describe">Describe</label>
+        <input
+          type="text"
+          name="describe"
+          id="describe"
+          value="asdqweasd"
+        /><br />
+        <label for="state">State</label>
+        <select name="state" id="state">
+          <option value="default">default</option>
+          <option value="progress">progress</option>
+          <option value="finish">finish</option>
+        </select>
+        <br />
+        <button class="create">create!</button>
+      </div>
     </div>
     <div class="content">
-        <div class="default">
-            <h2>default</h2>
-        </div>
-        <div class="progress">
-            <h2>progress</h2>
-        </div>
-        <div class="finish">
-            <h2>finish</h2>
-        </div>
+      <div class="default">
+        <h2>default</h2>
+      </div>
+      <div class="progress">
+        <h2>progress</h2>
+      </div>
+      <div class="finish">
+        <h2>finish</h2>
+      </div>
     </div>
-</body>
+  </body>
 </html>
