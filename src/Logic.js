@@ -30,9 +30,12 @@ export class TodoManager {
     this.generatedIDs = [];
   }
 
-  createTodo(id, title, description, state) {
-    // const id = this.generateID();
-    const newTodo = new Todo(id, title, description, state);
+  createTodo(newTodo) {
+    const id = this.generateID();
+    newTodo.id = id;
+    console.log(newTodo);
+    // title, description, state
+    // const newTodo = new Todo(title, description, state);
     this.pushToSelectState(newTodo, newTodo.state);
   }
 
