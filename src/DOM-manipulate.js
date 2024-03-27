@@ -32,6 +32,12 @@ export default class TodoDOM_Manager {
     const todo = document.createElement("div");
     for (const [key, value] of Object.entries(object)) {
       // console.log(`Key: ${key}, Value: ${value}`);
+      // todo.classList.add(key);
+      if (key === "id") {
+        todo.setAttribute("id", value);
+        // will not show at DOM
+        // continue;
+      }
       const keyDiv = document.createElement("div");
       keyDiv.textContent = value;
       todo.appendChild(keyDiv);
@@ -53,4 +59,6 @@ export default class TodoDOM_Manager {
         break;
     }
   }
+
+  delete_Todo(todo) {}
 }

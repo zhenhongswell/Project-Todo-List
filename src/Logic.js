@@ -27,6 +27,9 @@ export class TodoManager {
       progress: [],
       finish: [],
     };
+    // use for delete
+    this.selectedtodos = [];
+
     this.generatedIDs = [];
   }
 
@@ -63,7 +66,7 @@ export class TodoManager {
     }
     console.error("Error: Todo with specified ID not found!");
   }
-  updateTodo(id, newTodo) {
+  updateTodoById(id, newTodo) {
     let originTodo = this.readTodoById(id);
     // may need to use update function
     Object.assign(originTodo, newTodo);
