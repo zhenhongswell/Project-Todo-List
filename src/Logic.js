@@ -28,8 +28,7 @@ export class TodoManager {
       finish: [],
     };
     // use for delete
-    this.selectedtodos = [];
-
+    this.selectedTodos = [];
     this.generatedIDs = [];
   }
 
@@ -47,7 +46,6 @@ export class TodoManager {
       const todosInState = this.todo_storage[state];
       const todo = todosInState.find((todo) => todo.id === id);
       if (todo) {
-        console.log(todo);
         return todo; // Return the todo if found
       }
     }
@@ -55,10 +53,14 @@ export class TodoManager {
     return null; // Return null if todo not found
   }
 
-  deleteTodoById(id) {
+  removeTodoById(id) {
     for (const state of Object.keys(this.todo_storage)) {
       const todosInState = this.todo_storage[state];
-      const index = todosInState.findIndex((todo) => todo.id === id);
+      //   console.log("removeTodoById", id);
+      const index = todosInState.findIndex((todo) => {
+        return todo.id === Number(id);
+      });
+
       if (index !== -1) {
         todosInState.splice(index, 1);
         return; // Exit the loop once the todo is deleted
@@ -75,8 +77,26 @@ export class TodoManager {
     this.todo_storage[state].push(todo);
   }
 
-  deleteID(id) {
-    this.generatedIDs.find((Element) => Element === id);
+  addSelectedTodo(id) {
+    this.selectedTodos.push(id);
+  }
+
+  removeSelectedTodo(todoToRemove) {
+    const index = this.selectedTodos.indexOf(todoToRemove); // Find the index of the element
+    if (index !== -1) {
+      // If the element exists in the array
+      this.selectedTodos.splice(index, 1); // Remove the element from the array
+    }
+  }
+
+  deleteGenerateID(id) {
+    const index = this.generatedIDs.findIndex((element) => {
+      console.log(element);
+      return element === Number(id);
+    });
+    if (index !== -1) {
+      this.generatedIDs.splice(index, 1);
+    }
   }
   generateID() {
     let id;

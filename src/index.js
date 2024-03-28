@@ -16,3 +16,21 @@ createBtn.addEventListener("click", () => {
   todoDOM_Manager.createTodo_DOM(updatedDOM_Value);
   todoManager.show();
 });
+
+deleteBtn.addEventListener("click", () => {
+  // console.log(todoDOM_Manager.collectTodoCheckboxIdsWithSelectionState());
+  const TodoCheckboxIdsWithSelectionState =
+    todoDOM_Manager.collectTodoCheckboxIdsWithSelectionState();
+  const TodoCheckboxIdsSelected = TodoCheckboxIdsWithSelectionState.selected;
+  todoDOM_Manager.delete_Todo_by_Id_Array(TodoCheckboxIdsSelected);
+
+  TodoCheckboxIdsSelected.forEach((id) => {
+    console.log("Selected", id);
+    todoManager.deleteGenerateID(id);
+    todoManager.removeTodoById(id);
+  });
+
+  todoManager.show();
+});
+
+

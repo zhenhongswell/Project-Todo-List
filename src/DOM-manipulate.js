@@ -31,12 +31,11 @@ export default class TodoDOM_Manager {
   createTodo_DOM(object) {
     const todo = document.createElement("div");
     for (const [key, value] of Object.entries(object)) {
-      // console.log(`Key: ${key}, Value: ${value}`);
-      // todo.classList.add(key);
       if (key === "id") {
-        todo.setAttribute("id", value);
-        // will not show at DOM
-        // continue;
+        todo.setAttribute("data-id", value);
+        const createdcheckbox = this.createSelectCheckBox(value);
+        todo.appendChild(createdcheckbox);
+        continue;
       }
       const keyDiv = document.createElement("div");
       keyDiv.textContent = value;
@@ -45,6 +44,46 @@ export default class TodoDOM_Manager {
     this.append_Todo_To_State_DOM(todo);
   }
 
+  createSelectCheckBox(id) {
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.setAttribute("data-id", id);
+    checkbox.setAttribute("selected", checkbox.checked);
+    // this is a closure to get the id when invoking the eventListener
+    checkbox.addEventListener("change", () => {
+      if (checkbox.checked) {
+        console.log(`${id} checked (Selected)!`);
+        checkbox.setAttribute("selected", checkbox.checked);
+      } else {
+        console.log(`${id} unchecked (Unselected)!`);
+        checkbox.setAttribute("selected", checkbox.checked);
+      }
+    });
+    return checkbox;
+  }
+  collectTodoCheckboxIdsWithSelectionState() {
+    // -state checkbox.checked value
+    const SelectedTodoCheckBoxes = contentDiv.querySelectorAll(
+      `input[type="checkbox"]`
+    );
+    const todoIds = {
+      selected: [],
+      unselected: [],
+    };
+    SelectedTodoCheckBoxes.forEach((SelectedTodoCheck) => {
+      console.log(SelectedTodoCheck);
+      const dataId = SelectedTodoCheck.getAttribute("data-id");
+      const dataSelected = SelectedTodoCheck.getAttribute("selected");
+
+      if (dataSelected === "true") {
+        todoIds.selected.push(dataId);
+      }
+      if (dataSelected === "false") {
+        todoIds.unselected.push(dataId);
+      }
+    });
+    return todoIds;
+  }
   // would not need to export
   append_Todo_To_State_DOM(todo) {
     switch (this.stateValue) {
@@ -60,5 +99,14 @@ export default class TodoDOM_Manager {
     }
   }
 
-  delete_Todo(todo) {}
+  delete_Todo_by_Id_Array(id_array) {
+    console.log(id_array);
+    id_array.forEach((id) => {
+      const todoThatNeedToBeDeleted = contentDiv.querySelector(
+        `[data-id="${id}"]`
+      );
+      console.log(todoThatNeedToBeDeleted);
+      todoThatNeedToBeDeleted.remove();
+    });
+  }
 }
