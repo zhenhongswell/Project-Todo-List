@@ -44,6 +44,7 @@ export class TodoManager {
   readTodoById(id) {
     for (const state of Object.keys(this.todo_storage)) {
       const todosInState = this.todo_storage[state];
+      console.log(todosInState);
       const todo = todosInState.find((todo) => todo.id === id);
       if (todo) {
         return todo; // Return the todo if found
@@ -68,9 +69,15 @@ export class TodoManager {
     }
     console.error("Error: Todo with specified ID not found!");
   }
-  updateTodoById(id, newTodo) {
-    let originTodo = this.readTodoById(id);
+  updateTodo(id, newTodo) {
+    // don't know why double click and print error message....
+    let originTodo =
+      this.readTodoById(Number(id)) == null
+        ? this.readTodoById(String(id))
+        : this.readTodoById(Number(id));
     // may need to use update function
+    console.log(typeof id, id);
+    console.log(originTodo, newTodo);
     Object.assign(originTodo, newTodo);
   }
   pushToSelectState(todo, state) {
